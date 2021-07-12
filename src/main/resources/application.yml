@@ -1,0 +1,13 @@
+spring:
+  cloud:    gateway:      routes:        - id: book-service           uri: lb://BOOK-SERVICE
+          predicates:          - Path=/booklibrary/**        - id: subscription-service 
+          uri: lb://SUBSCRIPTION-SERVICE
+          predicates:
+          - Path=/subscriber/**
+    bus:
+      refresh:
+        enabled: true
+      env:
+        enabled: true
+  kafka:
+    bootstrap-servers: ${KAFKA_ADDR:http://localhost:9092}
